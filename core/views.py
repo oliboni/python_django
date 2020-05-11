@@ -30,16 +30,15 @@ def submit_login(req):
         password = req.POST.get('password')
         user = authenticate(username=username, password=password)
         if user is not None:
-            if user.is_activate:
-                login(req, user)
-                return redirect('/')
-            else:
-                messages.error(req, 'Seu usuário está desativado!')
+            #if user.is_activate:
+            login(req, user)
+            return redirect('/')
+            #else:
+                #messages.error(req, 'Seu usuário está desativado!')
         else:
             messages.error(req, 'Usuário e senha inválodo. Favor tentar novamente')
     return redirect('/login')
 
 def logout_user(req):
-    print(req.user)
     logout(req)
     return redirect('/login/')
